@@ -1,4 +1,4 @@
-# Transformer Based Punctuation Restoration Models for Turkish
+# ViT (Vision Transformer) Implement and Train From Scratch
 
 <div align="center">
     <a href="">
