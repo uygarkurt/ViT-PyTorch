@@ -75,7 +75,7 @@ x = torch.randn(512, 1, 28, 28).to(device)
 print(model(x).shape)
 ```
 
-### ViT <a class="anchor" id="vit"
+### ViT <a class="anchor" id="vit">
 
 ```
 class ViT(nn.Module):
