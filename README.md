@@ -30,6 +30,7 @@ This repository also contains a corresponding YouTube tutorial with the title **
     * [PatchEmbedding](#embed)
     * [ViT](#vit)
 * [Contact](#contact)
+* [References](#reference)
 
 ## Usage <a class="anchor" id="usage"></a>
 
