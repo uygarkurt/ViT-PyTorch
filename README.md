@@ -24,13 +24,37 @@ This repository also contains a corresponding YouTube tutorial with the title **
 
 ## Table of Contents
 * [ViT Implementation](#vitimp)
-* [Usage](#usage)
-    * [PatchEmbedding](#embed)
     * [ViT](#vit)
+    * [PatchEmbedding](#embed)
+* [Usage](#usage)
 * [Contact](#contact)
 
 ## ViT Implementation <a class="anchor" id="vitimp"></a>
-We need two functions to implement ViT. One for processing the image and embeddings until we feed the transformer encoder, and another function for the rest of the process. They're `PatchEmbedding` and `ViT` functions respectively.
+We need two classes to implement ViT. One for processing the image and embeddings until we feed the transformer encoder, and another function for the rest of the process. They're `PatchEmbedding` and `ViT` functions respectively.
+
+
+### ViT <a class="anchor" id="vit">
+
+```
+class ViT(nn.Module):
+    def __init__(self, num_patches, img_size, num_classes, patch_size, embed_dim, num_encoders, num_heads, hidden_dim, dropout, activation, in_channels):
+        super().__init__()
+        self.embeddings_block = PatchEmbedding(embed_dim, patch_size, num_patches, dropout, in_channels)
+
+        encoder_layer = nn.TransformerEncoderLayer(d_model=embed_dim, nhead=num_heads, dropout=dropout, activation=activation, batch_first=True, norm_first=True)
+        self.encoder_blocks = nn.TransformerEncoder(encoder_layer, num_layers=num_encoders)
+
+        self.mlp_head = nn.Sequential(
+            nn.LayerNorm(normalized_shape=embed_dim),
+            nn.Linear(in_features=embed_dim, out_features=num_classes)
+        )
+
+    def forward(self, x):
+        x = self.embeddings_block(x)
+        x = self.encoder_blocks(x)
+        x = self.mlp_head(x[:, 0, :])
+        return x
+```
 
 ### PatchEmbedding <a class="anchor" id="embed">
 
@@ -59,37 +83,6 @@ class PatchEmbedding(nn.Module):
         x = self.position_embeddings + x
         x = self.dropout(x)
         return x
-
-model = PatchEmbedding(EMBED_DIM, PATCH_SIZE, NUM_PATCHES, DROPOUT, IN_CHANNELS).to(device)
-x = torch.randn(512, 1, 28, 28).to(device)
-print(model(x).shape)
-```
-
-### ViT <a class="anchor" id="vit">
-
-```
-class ViT(nn.Module):
-    def __init__(self, num_patches, img_size, num_classes, patch_size, embed_dim, num_encoders, num_heads, hidden_dim, dropout, activation, in_channels):
-        super().__init__()
-        self.embeddings_block = PatchEmbedding(embed_dim, patch_size, num_patches, dropout, in_channels)
-
-        encoder_layer = nn.TransformerEncoderLayer(d_model=embed_dim, nhead=num_heads, dropout=dropout, activation=activation, batch_first=True, norm_first=True)
-        self.encoder_blocks = nn.TransformerEncoder(encoder_layer, num_layers=num_encoders)
-
-        self.mlp_head = nn.Sequential(
-            nn.LayerNorm(normalized_shape=embed_dim),
-            nn.Linear(in_features=embed_dim, out_features=num_classes)
-        )
-
-    def forward(self, x):
-        x = self.embeddings_block(x)
-        x = self.encoder_blocks(x)
-        x = self.mlp_head(x[:, 0, :])
-        return x
-
-model = ViT(NUM_PATCHES, IMG_SIZE, NUM_CLASSES, PATCH_SIZE, EMBED_DIM, NUM_ENCODERS, NUM_HEADS, HIDDEN_DIM, DROPOUT, ACTIVATION, IN_CHANNELS).to(device)
-x = torch.randn(512, 1, 28, 28).to(device)
-print(model(x).shape)
 ```
 
 ## Usage <a class="anchor" id="usage"></a>
