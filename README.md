@@ -91,8 +91,5 @@ You can run the code by downloading the notebook and updating the paths of `trai
 
 You can also view it directly from https://www.kaggle.com/code/uygarkk/youtube-vit-implementation
 
-Notebook: Implements ViT from scratch, trains it on MNIST dataset, tests it and does inference.
-
-
 ## Contact <a class="anchor" id="contact"></a>
 You can contact me with this email address: uygarsci@gmail.com
