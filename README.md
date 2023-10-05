@@ -12,7 +12,6 @@
 </div>
 
 <p float="left">
-  <img src="./assets/result.png" />
   <img scr="./assets/arc.png" />
 </p>
 
