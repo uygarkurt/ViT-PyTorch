@@ -30,7 +30,6 @@ This repository also contains a corresponding YouTube tutorial with the title **
     * [PatchEmbedding](#embed)
     * [ViT](#vit)
 * [Contact](#contact)
-* [References](#reference)
 
 ## Usage <a class="anchor" id="usage"></a>
 
@@ -105,9 +104,3 @@ print(model(x).shape)
 
 ## Contact <a class="anchor" id="contact"></a>
 You can contact me with this email address: uygarsci@gmail.com
-
-## References <a class="references" id="reference"></a>
-https://arxiv.org/abs/2010.11929
-https://github.com/r-evaar/torch_engine
-https://www.kaggle.com/code/ignazio/vision-transformers-in-pytorch-for-mnist-handwritt
-https://www.kaggle.com/code/taranmarley/vitransformer-step-by-step
