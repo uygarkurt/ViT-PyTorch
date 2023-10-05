@@ -23,19 +23,11 @@ This repository also contains a corresponding YouTube tutorial with the title **
 [![Thumbnail](./assets/notebook-thumbnail.png)](https://www.youtube.com/watch?v=Vonyoz6Yt9c&t=2s)
 
 ## Table of Contents
-* [Usage](#usage)
 * [ViT Implementation](#vitimp)
+* [Usage](#usage)
     * [PatchEmbedding](#embed)
     * [ViT](#vit)
 * [Contact](#contact)
-
-## Usage <a class="anchor" id="usage"></a>
-
-You can run the code by downloading the notebook and updating the paths of `train` and `test` datasets.
-
-You can also view it directly from https://www.kaggle.com/code/uygarkk/youtube-vit-implementation
-
-Notebook: Implements ViT from scratch, trains it on MNIST dataset, tests it and does inference.
 
 ## ViT Implementation <a class="anchor" id="vitimp"></a>
 We need two functions to implement ViT. One for processing the image and embeddings until we feed the transformer encoder, and another function for the rest of the process. They're `PatchEmbedding` and `ViT` functions respectively.
@@ -99,6 +91,15 @@ model = ViT(NUM_PATCHES, IMG_SIZE, NUM_CLASSES, PATCH_SIZE, EMBED_DIM, NUM_ENCOD
 x = torch.randn(512, 1, 28, 28).to(device)
 print(model(x).shape)
 ```
+
+## Usage <a class="anchor" id="usage"></a>
+
+You can run the code by downloading the notebook and updating the paths of `train` and `test` datasets.
+
+You can also view it directly from https://www.kaggle.com/code/uygarkk/youtube-vit-implementation
+
+Notebook: Implements ViT from scratch, trains it on MNIST dataset, tests it and does inference.
+
 
 ## Contact <a class="anchor" id="contact"></a>
 You can contact me with this email address: uygarsci@gmail.com
