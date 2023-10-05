@@ -11,7 +11,7 @@
     <p>Liked our work? give us a ⭐!</p>
 </div>
 
-<p align="left">
+<p float="left">
   <img src="./assets/result.png" />
   <img scr="./assets/arc.png" />
 </p>
