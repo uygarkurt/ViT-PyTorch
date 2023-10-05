@@ -17,11 +17,6 @@
 
 This repository contains minimalistic implementation of ViT (Vision Transformer) that is introduced in the paper [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929) using PyTorch. Implementation has tested using the [MNIST Dataset](https://www.kaggle.com/competitions/digit-recognizer).
 
-<p align="center">
-</p>
-
-Above example demonstrates original images and predicted labels by the ViT model.
-
 ### YouTube Tutorial
 This repository also contains a corresponding YouTube tutorial with the title **Implement and Train ViT From Scratch for Image Recognition - PyTorch**
 
