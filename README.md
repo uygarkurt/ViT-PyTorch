@@ -1,4 +1,4 @@
-# ViT (Vision Transformer) Implement and Train From Scratch
+# ViT (Vision Transformer) Implementation With PyTorch
 
 <div align="center">
     <a href="">
@@ -15,12 +15,12 @@
   <img src="./assets/result.png" />
 </p>
 
-This repository contains minimalistic implementation of ViT (Vision Transformer) that is introduced in the paper (An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale)[https://arxiv.org/abs/2010.11929] using PyTorch. Implementation has tested using Digit Recognizer Competition (MNIST)[https://www.kaggle.com/competitions/digit-recognizer].
+This repository contains minimalistic implementation of ViT (Vision Transformer) that is introduced in the paper (An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale)[https://arxiv.org/abs/2010.11929] using PyTorch. Implementation has tested using the (MNIST Dataset)[https://www.kaggle.com/competitions/digit-recognizer].
 
 Above example demonstrates original images and predicted labels by the ViT model.
 
 ### YouTube Tutorial
-This repository also contains a corresponding YouTube tutorial with the title **ViT (Vision Transformer) Implement and Train From Scratch || An Image is Worth 16x16 Words**
+This repository also contains a corresponding YouTube tutorial with the title **Implement and Train ViT From Scratch for Image Recognition - PyTorch**
 
 [![Thumbnail](./assets/notebook-thumbnail.png)](https://www.youtube.com/watch?v=Vonyoz6Yt9c&t=2s)
 
@@ -33,7 +33,7 @@ This repository also contains a corresponding YouTube tutorial with the title **
 
 ## Usage <a class="anchor" id="usage"></a>
 
-I realized it's easier to follow through if the implementation is done via notebook instead of file by file. So this time I did it that way. You can run the code by downloading the notebook and updating the paths of `train` and `test` datasets.
+You can run the code by downloading the notebook and updating the paths of `train` and `test` datasets.
 
 You can also view it directly from https://www.kaggle.com/code/uygarkk/youtube-vit-implementation
 
@@ -104,3 +104,9 @@ print(model(x).shape)
 
 ## Contact <a class="anchor" id="contact"></a>
 You can contact me with this email address: uygarsci@gmail.com
+
+## References <a class="references" id="reference"></a>
+https://arxiv.org/abs/2010.11929
+https://github.com/r-evaar/torch_engine
+https://www.kaggle.com/code/ignazio/vision-transformers-in-pytorch-for-mnist-handwritt
+https://www.kaggle.com/code/taranmarley/vitransformer-step-by-step
