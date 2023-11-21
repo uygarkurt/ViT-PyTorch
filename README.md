@@ -171,10 +171,7 @@ for i in range(2):
 ```
 
 ## Usage <a class="anchor" id="usage"></a>
-
-You can run the code by downloading the notebook and updating the paths of `train` and `test` datasets.
-
-You can also view it directly from https://www.kaggle.com/code/uygarkk/youtube-vit-implementation
+You can run the code by downloading the notebook and updating the variables `train_df` and `test_df` to point a valid dataset location.
 
 ## Contact <a class="anchor" id="contact"></a>
 You can contact me with this email address: uygarsci@gmail.com
