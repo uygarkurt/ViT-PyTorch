@@ -28,6 +28,7 @@ This repository also contains a corresponding YouTube tutorial with the title:
 <div align="center">
     <a href="https://www.youtube.com/watch?v=Vonyoz6Yt9c&t=2s">Implement and Train ViT From Scratch for Image Recognition - PyTorch</a>
     <br>
+    <br>
     <a href="https://www.youtube.com/watch?v=Vonyoz6Yt9c&t=2s">
         <img src="./assets/notebook-thumbnail.png" height="85%" width="85%%"/>
     </a>
