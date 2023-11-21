@@ -39,6 +39,7 @@ This repository contains unofficial implementation of ViT (Vision Transformer) t
     * [ViT](#vit)
     * [PatchEmbedding](#embed)
 * [Train Loop](#trainloop)
+* [Inference](#inference)
 * [Usage](#usage)
 * [Contact](#contact)
 
@@ -154,6 +155,19 @@ for epoch in tqdm(range(EPOCHS), position=0, leave=True):
 
 stop = timeit.default_timer()
 print(f"Training Time: {stop-start:.2f}s")
+```
+
+## Inference <a class="anchor" id="inference"></a>
+
+```
+plt.figure()
+f, axarr = plt.subplots(2, 3)
+counter = 0
+for i in range(2):
+    for j in range(3):
+        axarr[i][j].imshow(imgs[counter].squeeze(), cmap="gray")
+        axarr[i][j].set_title(f"Predicted {labels[counter]}")
+        counter += 1
 ```
 
 ## Usage <a class="anchor" id="usage"></a>
