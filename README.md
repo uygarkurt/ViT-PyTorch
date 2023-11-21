@@ -3,7 +3,11 @@
 <div align="center">
     <a href="">
         <img alt="open-source-image"
-		src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">
+        src="https://img.shields.io/badge/%E2%9D%A4%EF%B8%8F_Open_Source-%2350C878?style=for-the-badge"/>
+    </a>
+    <a href="https://www.youtube.com/watch?v=Vonyoz6Yt9c&t=2s">
+        <img alt="youtube-tutorial"
+        src="https://img.shields.io/badge/YouTube_Tutorial-grey?style=for-the-badge&logo=YouTube&logoColor=%23FF0000"/>
     </a>
 </div>
 <br/>
@@ -15,22 +19,29 @@
   <img src="./assets/arc.png" height="70%" width="70%"/>
 </p>
 
-This repository contains minimalistic implementation of ViT (Vision Transformer) that is introduced in the paper [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929) using PyTorch. Implementation has tested using the [MNIST Dataset](https://www.kaggle.com/competitions/digit-recognizer).
+This repository contains unofficial implementation of ViT (Vision Transformer) that is introduced in the paper [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929) using PyTorch. Implementation has tested using the [MNIST Dataset](https://www.kaggle.com/competitions/digit-recognizer) for image classification task.
 
-### YouTube Tutorial
-This repository also contains a corresponding YouTube tutorial with the title **Implement and Train ViT From Scratch for Image Recognition - PyTorch**
+## YouTube Tutorial
+This repository also contains a corresponding YouTube tutorial with the title:
+<br>
+<br>
+**Implement and Train ViT From Scratch for Image Recognition - PyTorch**
 
-[![Thumbnail](./assets/notebook-thumbnail.png)](https://www.youtube.com/watch?v=Vonyoz6Yt9c&t=2s)
+<p align="center">
+    <a href="https://www.youtube.com/watch?v=Vonyoz6Yt9c&t=2s">
+    <img src="./assets/notebook-thumbnail.png" height="85%" width="85%%"/>
+</a>
 
 ## Table of Contents
 * [ViT Implementation](#vitimp)
     * [ViT](#vit)
     * [PatchEmbedding](#embed)
+* [Train Loop](#trainloop)
 * [Usage](#usage)
 * [Contact](#contact)
 
 ## ViT Implementation <a class="anchor" id="vitimp"></a>
-We need two classes to implement ViT. One for processing the image and embeddings until we feed the transformer encoder, and another function for the rest of the process. They're `PatchEmbedding` and `ViT` functions respectively.
+We need two classes to implement ViT. First is the `PatchEmbedding` to processing the image and embeddings until we feed the transformer encoder Second is the `ViT` for the rest of the process. 
 
 
 ### ViT <a class="anchor" id="vit">
@@ -83,6 +94,64 @@ class PatchEmbedding(nn.Module):
         x = self.position_embeddings + x
         x = self.dropout(x)
         return x
+```
+
+## Train Loop <a class="anchor" id="trainloop"></a>
+```
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters(), betas=ADAM_BETAS, lr=LEARNING_RATE, weight_decay=ADAM_WEIGHT_DECAY)
+
+start = timeit.default_timer()
+for epoch in tqdm(range(EPOCHS), position=0, leave=True):
+    model.train()
+    train_labels = []
+    train_preds = []
+    train_running_loss = 0
+    for idx, img_label in enumerate(tqdm(train_dataloader, position=0, leave=True)):
+        img = img_label["image"].float().to(device)
+        label = img_label["label"].type(torch.uint8).to(device)
+        y_pred = model(img)
+        y_pred_label = torch.argmax(y_pred, dim=1)
+
+        train_labels.extend(label.cpu().detach())
+        train_preds.extend(y_pred_label.cpu().detach())
+
+        loss = criterion(y_pred, label)
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        train_running_loss += loss.item()
+    train_loss = train_running_loss / (idx + 1)
+
+    model.eval()
+    val_labels = []
+    val_preds = []
+    val_running_loss = 0
+    with torch.no_grad():
+        for idx, img_label in enumerate(tqdm(val_dataloader, position=0, leave=True)):
+            img = img_label["image"].float().to(device)
+            label = img_label["label"].type(torch.uint8).to(device)
+            y_pred = model(img)
+            y_pred_label = torch.argmax(y_pred, dim=1)
+
+            val_labels.extend(label.cpu().detach())
+            val_preds.extend(y_pred_label.cpu().detach())
+
+            loss = criterion(y_pred, label)
+            val_running_loss += loss.item()
+    val_loss = val_running_loss / (idx + 1)
+
+    print("-"*30)
+    print(f"Train Loss EPOCH {epoch+1}: {train_loss:.4f}")
+    print(f"Valid Loss EPOCH {epoch+1}: {val_loss:.4f}")
+    print(f"Train Accuracy EPOCH {epoch+1}: {sum(1 for x,y in zip(train_preds, train_labels) if x == y) / len(train_labels):.4f}")
+    print(f"Valid Accuracy EPOCH {epoch+1}: {sum(1 for x,y in zip(val_preds, val_labels) if x == y) / len(val_labels):.4f}")
+    print("-"*30)
+
+stop = timeit.default_timer()
+print(f"Training Time: {stop-start:.2f}s")
 ```
 
 ## Usage <a class="anchor" id="usage"></a>
